@@ -26,7 +26,7 @@ pip install onnxruntime-gpu==1.18.0 --extra-index-url https://aiinfra.pkgs.visua
 
 **🚩 Important:** depending on underlying versions of `cudnn` and `cuda` backend you might need to tweak installation of `onnxruntime-gpu` for it to work with gpu (everything will work with cpu version, just slower). For further details about recommended version refer to [this issue comment](https://github.com/microsoft/onnxruntime/issues/21684#issuecomment-2375853992) and official documentation.
 
-To run evaluation additionally download models via executing `download_eval_ckpts.py`.
+During running all checkpoints and models are installed in local `models_cache/` directory.
 
 ## Evaluation dataset
 
@@ -40,12 +40,12 @@ To download, activate environment created during [Installation](#installation) a
 
 ## Run
 
-For running inference on separate identity/prompt pare, refer to `notebooks/example.ipynb`. To run a widescale evaluation with our evaluation dataset, execute `diff_eval_idadapter.py`, refer to script for arguments details (remember to download dataset first). Basic command to run method on full data with Hyper checkpoint is given below:
+For running inference on separate identity/prompt pare, refer to `notebooks/inference_example.ipynb`. To run a widescale evaluation with our evaluation dataset, execute `diff_eval_idadapter.py`, refer to script for arguments details (remember to download dataset first). Basic command to run method on full data with Hyper checkpoint is given below:
 
 ```bash
 python diff_eval_idadapter.py --target_adapter="faceid"\
  --ips=0.8 --lora_scale=0.8\
- --data_dir="data/evaluation_ds_v2"\
+ --data_dir="data/"\
  --config_dir="configs/fastface/am1_and_dcg.json"\
  --ds_type="realistic"\
  --out_dir="res"\
@@ -54,13 +54,12 @@ python diff_eval_idadapter.py --target_adapter="faceid"\
  --device="cuda:0"
 ```
 
-
 ## Citation
 
 If you find this work useful, please cite it as follows:
 
 ```bibtex
-@article{2025fastface,
+@article{...,
   title={FastFace: Tuning Identity Preservation in Distilled Diffusion via Guidance and Attention},
   author={Sergey Karpukhin, Vadim Titov, Andrey Kuznetsov, Aibek Alanov},
   journal={arXiv},
