@@ -1,0 +1,37 @@
+{
+    "model_name": "hyper",
+    "method": "faceid",
+    "pipe_kwargs": {
+        "num_inference_steps": 4,
+        "guidance_scale_a": 1.0,
+        "guidance_scale_b": 1.0,
+        "width": 1024,
+        "height": 1024,
+        "dcg_kwargs": {
+            "dcg_type": 3,
+            "term_preproc": "",
+            "term_postproc": "",
+            "rescale": 0,
+            "a_scheduler": "default",
+            "b_scheduler": "default",
+            "sch_kwargs": {
+                "a": {},
+                "b": {}
+            },
+            "return_norms": false
+        }
+    },
+    "ip_adapter_scale": 0.8,
+    "faceid_lora_scale": 1.0,
+    "reset_gs_to_default": true,
+    "patch_pipe": true,
+    "am_patch_kwargs": {
+        "target_parts": ["down", "up"],
+        "target_tokens": [0, 1, 2, 3],
+        "target_tsteps": [0, 1, 2, 3],
+        "am_transforms": ["adaptive_softmask", "scale"],
+        "inverse_neg_transforms": true,
+        "apply_schedule": true
+    }
+}
+

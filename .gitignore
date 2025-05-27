@@ -1,0 +1,12 @@
+venv/
+env/
+data/
+res/
+final_res/
+hf_cache/
+wandb/
+models_cache/
+**/.ipynb_checkpoints/
+**/__pycache__
+**/.vscode
+
