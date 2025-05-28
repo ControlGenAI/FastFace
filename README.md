@@ -10,6 +10,7 @@
 
 ## Updates
 
+- **2025/5/28**  code and data release
 - **2025/5/27**  arxiv preprint release
 
 
@@ -53,6 +54,10 @@ python diff_eval_idadapter.py --target_adapter="faceid"\
  --include_hyper_4\
  --device="cuda:0"
 ```
+
+## Acknowledgments
+
+This project heavily relies on source code of [diffusers](https://huggingface.co/docs/diffusers/index).
 
 ## Citation
 
