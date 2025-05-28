@@ -60,11 +60,9 @@ class ExperimentDataset(Dataset):
         return sorted_images
     
     def __getitem__(self, idx):
-        _, prompt = self.dataset[self.ids[idx]] # naaaaahr
+        _, prompt = self.dataset[self.ids[idx]]
         ref_img_path, out_img_papth = self.get_imgs_paths(idx)
         ref_img, out_img = self._get_images(ref_img_path, out_img_papth)
-        ref_img = interpolate(ref_img.unsqueeze(0), (1024, 1024)).squeeze(0)
-        out_img = interpolate(out_img.unsqueeze(0), (512, 512)).squeeze(0)
         return idx, prompt, ref_img, out_img
     
     def _process_image(self, image):

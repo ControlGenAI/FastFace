@@ -1,6 +1,6 @@
 # FastFace: Tuning Identity Preservation in Distilled Diffusion via Guidance and Attention
 
-<a href="https://arxiv.org/abs/..."><img src="https://img.shields.io/badge/arXiv-...-b31b1b.svg" height=22.5><a>
+<a href="https://arxiv.org/abs/2505.21144"><img src="https://img.shields.io/badge/arXiv-2505.21144-b31b1b.svg" height=22.5><a>
 [![License](https://img.shields.io/github/license/AIRI-Institute/al_toolbox)](./LICENSE)
 
 >In latest years plethora of identity-preserving adapters for a personalized generation with diffusion models have been released. Their main disadvantage is that they are dominantly trained jointly with base diffusion models, which suffer from slow multi-step inference. This work aims to tackle the challenge of training-free adaptation of pretrained ID-adapters to diffusion models accelerated via distillation - through careful re-design of classifier-free guidance for few-step stylistic generation and attention manipulation mechanisms in decoupled blocks to improve identity similarity and fidelity, we propose universal FastFace framework. Additionally, we develop a disentangled public evaluation protocol for id-preserving adapters.
@@ -40,7 +40,7 @@ To download, activate environment created during [Installation](#installation) a
 
 ## Run
 
-For running inference on separate identity/prompt pare, refer to `notebooks/inference_example.ipynb`. To run a widescale evaluation with our evaluation dataset, execute `diff_eval_idadapter.py`, refer to script for arguments details (remember to download dataset first). Basic command to run method on full data with Hyper checkpoint is given below:
+For running inference on aribtrary identity/prompt pair, refer to `notebooks/inference_example.ipynb`. To run a widescale evaluation with our evaluation dataset, execute `diff_eval_idadapter.py`, refer to script for arguments details (remember to download dataset first). Basic command to run method on full data with Hyper checkpoint is given below:
 
 ```bash
 python diff_eval_idadapter.py --target_adapter="faceid"\
@@ -59,7 +59,7 @@ python diff_eval_idadapter.py --target_adapter="faceid"\
 If you find this work useful, please cite it as follows:
 
 ```bibtex
-@article{...,
+@article{karpukhin2025fastfacetuningidentitypreservation,
   title={FastFace: Tuning Identity Preservation in Distilled Diffusion via Guidance and Attention},
   author={Sergey Karpukhin, Vadim Titov, Andrey Kuznetsov, Aibek Alanov},
   journal={arXiv},
