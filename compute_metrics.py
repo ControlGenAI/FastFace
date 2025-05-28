@@ -10,11 +10,9 @@ import torch
 from tqdm.auto import tqdm
 
 from src.dataset import FaceIdDataset
-from src.evaluation.metrics import ExperimentDataset
 from src.evaluation.face_metrics import FaceDistanceMetric, FaceClipScore
 from src.evaluation.clip_metric import CLIPMetric
 from src.evaluation.aesthetic_metric import AestheticMetric
-from src.evaluation.face_metrics import get_face_ratios
 
 
 def process_raw_metrics(metrics_raw, exp_runs, metrics_knames, agg_metrics):
@@ -66,9 +64,7 @@ def metrics_flags_to_knames(
 @click.option("--include_ir", is_flag=True, show_default=True, default=False, help="AE/IR metrics")
 @click.option("--include_faceclip", is_flag=True, show_default=True, default=False, help="FCS metric")
 # options
-@click.option('--rthresh', nargs=1, type=float, default=None, help="face bb ratio threshold for evaluation")
 @click.option("--save_raw", is_flag=True, show_default=True, default=False)
-@click.option("--build_ratios", is_flag=True, show_default=True, default=False)
 def main(
     exp_runs,
     log_to, 
@@ -80,9 +76,7 @@ def main(
     include_clipscore,
     include_ir,
     include_faceclip,
-    rthresh, 
     save_raw,
-    build_ratios,
 ):
 
     if not torch.cuda.is_available(): 
@@ -124,12 +118,6 @@ def main(
 
     print("target metrics: " + str(metrics_knames))
 
-    if build_ratios: # make sure that ratios.json exists in each exp dir
-        for exp_name in exp_runs:
-            if os.path.exists(Path(exp_name) / "ratios.json"): 
-                continue
-            get_face_ratios(ExperimentDataset(exp_name, dataset, filter_subset=is_valid_example)) # file with ratios saved in exp dir
-
     # manually install these models into according paths
     if not os.path.exists('models_cache/ir'):
         print("Downloading Reward models...")
@@ -160,9 +148,8 @@ def main(
                     exp_name,
                     dataset,
                     device=DEVICE,
-                    build_ratios=build_ratios,
                     filter_subset=is_valid_example,
-                )(rthresh=rthresh)
+                )()
         
                 metrics_raw[exp_name]["face_d"] = face_dist_metrics
                 metrics_raw[exp_name]["face_fail_cnt"] = face_fail_cnt # amount of times there was no face in image
@@ -172,9 +159,8 @@ def main(
                     exp_name,
                     dataset,
                     device=DEVICE,
-                    build_ratios=build_ratios,
                     filter_subset=is_valid_example,
-                )(rthresh=rthresh)
+                )()
                 
                 metrics_raw[exp_name]["clip"] = clip_scores
             
@@ -185,9 +171,8 @@ def main(
                     device=DEVICE,
                     ir_path=ir_path,
                     model_path=acu_path,
-                    build_ratios=build_ratios,
                     filter_subset=is_valid_example,
-                )(rthresh=rthresh)
+                )()
                 
                 metrics_raw[exp_name]["aesthetic"] = aesthetic_metrics
 
@@ -196,9 +181,8 @@ def main(
                     exp_name,
                     dataset,
                     device=DEVICE,
-                    build_ratios=build_ratios,
                     filter_subset=is_valid_example,
-                )(rthresh=rthresh)
+                )()
                 metrics_raw[exp_name]["face_clip"] = faceclip_scores 
         except IndexError as e:
             print(f"IndexError: {e}")

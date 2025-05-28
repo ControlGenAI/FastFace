@@ -10,8 +10,6 @@ from torchvision.transforms import ToTensor
 from PIL import Image
 from tqdm.auto import tqdm
 
-from torch.nn.functional import interpolate
-
 
 class ExperimentDataset(Dataset):
     def __init__(
