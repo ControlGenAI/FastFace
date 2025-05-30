@@ -3,6 +3,7 @@ env/
 data/
 res/
 final_res/
+output/
 hf_cache/
 wandb/
 models_cache/

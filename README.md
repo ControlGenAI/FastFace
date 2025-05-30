@@ -64,10 +64,13 @@ This project heavily relies on source code of [diffusers](https://huggingface.co
 If you find this work useful, please cite it as follows:
 
 ```bibtex
-@article{karpukhin2025fastfacetuningidentitypreservation,
-  title={FastFace: Tuning Identity Preservation in Distilled Diffusion via Guidance and Attention},
-  author={Sergey Karpukhin, Vadim Titov, Andrey Kuznetsov, Aibek Alanov},
-  journal={arXiv},
-  year={2025},
+@misc{karpukhin2025fastfacetuningidentitypreservation,
+      title={FastFace: Tuning Identity Preservation in Distilled Diffusion via Guidance and Attention}, 
+      author={Sergey Karpukhin and Vadim Titov and Andrey Kuznetsov and Aibek Alanov},
+      year={2025},
+      eprint={2505.21144},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2505.21144}, 
 }
 ```
