@@ -1,6 +1,7 @@
 # FastFace: Tuning Identity Preservation in Distilled Diffusion via Guidance and Attention
 
 <a href="https://arxiv.org/abs/2505.21144"><img src="https://img.shields.io/badge/arXiv-2505.21144-b31b1b.svg" height=22.5><a>
+<a href="https://colab.research.google.com/drive/1-Bs5YHwi-dJH0gtU4y0DTY-oLKbhMYkE?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" height=22.5></a>
 [![License](https://img.shields.io/github/license/AIRI-Institute/al_toolbox)](./LICENSE)
 
 >In latest years plethora of identity-preserving adapters for a personalized generation with diffusion models have been released. Their main disadvantage is that they are dominantly trained jointly with base diffusion models, which suffer from slow multi-step inference. This work aims to tackle the challenge of training-free adaptation of pretrained ID-adapters to diffusion models accelerated via distillation - through careful re-design of classifier-free guidance for few-step stylistic generation and attention manipulation mechanisms in decoupled blocks to improve identity similarity and fidelity, we propose universal FastFace framework. Additionally, we develop a disentangled public evaluation protocol for id-preserving adapters.
@@ -10,6 +11,7 @@
 
 ## Updates
 
+- **2025/6/04** 🔥 colab demo released
 - **2025/5/28**  code and data release
 - **2025/5/27**  arxiv preprint release
 
