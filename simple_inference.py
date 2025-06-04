@@ -1,9 +1,11 @@
 import json
 import os
+import gc
 
 import click
 import torch
 import numpy as np
+from diffusers import AutoencoderTiny
 
 import src.sdxl_custom_pipeline as sdxl_pipeline
 from src.custom_dca import patch_pipe, reset_patched_unet
@@ -34,7 +36,6 @@ def main(
     DEVICE=torch.device(device)    
     with open(os.path.join(config_dir), "r") as f:
         conf = json.load(f)
-    
 
     conf["model_name"] = model_name
     conf["pipe_kwargs"]["num_inference_steps"] = 4
@@ -56,8 +57,16 @@ def main(
     else:
         conf["pipe_kwargs"]["height"] = default_hw[0]
         conf["pipe_kwargs"]["width"] = default_hw[1]
-
     pipe = sdxl_pipeline.name2pipe["faceid"](conf, DEVICE)
+    
+    # for colab demo use pruned cheap vae
+    pipe.vae = AutoencoderTiny.from_pretrained(
+        "madebyollin/taesdxl", 
+        torch_dtype=torch.float16,
+        cache_dir="models_cache/"
+    ).to(DEVICE)
+    torch.cuda.empty_cache()
+    gc.collect()
 
     if conf["method"] == "faceid" and "faceid_lora_scale" in conf:
         assert "faceid_0" in pipe.unet.peft_config
@@ -75,7 +84,6 @@ def main(
     assert np.all(np.array(ips_values) > 0), "ip_adapter_scale values should be positive"
     
     os.makedirs("output", exist_ok=True)
-    
     for ipsv in ips_values:
         pipe.set_ip_adapter_scale(ipsv)
         generator = torch.Generator(device=DEVICE).manual_seed(seed)
